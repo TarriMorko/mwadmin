@@ -5,7 +5,7 @@
 
 ## [0.2.0] - 2019-10-16
 ### Added
-- Add useradd.sh.
+- Add useradd.sh
 
 ## [0.1.0] - 2019-10-15
 ### Added
