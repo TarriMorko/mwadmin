@@ -62,11 +62,6 @@ get_userpassword() {
     return 0
 }
 
-get_userhome() {
-    # 懶得改
-    echo "none"
-}
-
 get_UID() {
     echo "請輸入 UID"
     read userID
