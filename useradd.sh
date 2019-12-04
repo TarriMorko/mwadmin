@@ -50,15 +50,15 @@ get_username() {
     fi
 }
 
-get_userfullname() {
-    echo "請輸入 User's Full Name 或註解。"
-    read userfullname
-    return 0
-}
-
 get_userpassword() {
     echo "請輸入 password。"
     read -s userpassword
+    return 0
+}
+
+get_comment() {
+    # Add user creation date in comment.
+    createtime=$(echo "$(date +"%Y-%m-%d")")
     return 0
 }
 
@@ -72,7 +72,7 @@ get_UID() {
         echo "返回前一頁。"
         return 1
     else
-        echo "請輸入可用的 UID"
+        echo "請輸入可用／已存在的 UID"
         return 1
     fi
 }
@@ -93,11 +93,11 @@ get_GID() {
 }
 
 exec_useradd() {
-    echo "即將執行命令： useradd --uid $userID --gid $userGID --comment \"${userfullname}\" $username"
+    echo "即將執行命令： useradd --uid $userID --gid $userGID --comment \"${createtime}\" $username"
     read -r -p "確認建立使用者? [y/N] " response
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-        writelog "Command: useradd --uid $userID --gid $userGID --comment "${userfullname}" $username"
-        useradd --uid $userID --gid $userGID --password "${password}" --comment "${userfullname}" $username 2>>${LOGFILENAME}
+        writelog "Command: useradd --create-home --uid $userID --gid $userGID --comment "${createtime}" $username"
+        useradd --create-home --uid $userID --gid $userGID --password "${password}" --comment "${createtime}" $username 2>>${LOGFILENAME}
         if [[ $? -eq 0 ]]; then
             id $userID
             writelog "建立使用者 $username 成功。"
@@ -115,7 +115,8 @@ exec_useradd() {
 main() {
     clear
     get_username || return $to_adv_opmenu
-    get_userfullname || return $to_adv_opmenu
+    get_userpassword
+    get_comment || return $to_adv_opmenu
     get_UID || return $to_adv_opmenu
     get_GID || return $to_adv_opmenu
 
