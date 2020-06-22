@@ -35,10 +35,16 @@ show_main_menu() {
        Today is $(date +%Y-%m-%d)
   +====================================================================+
 
-       1. 新增使用者
-       2. 刪除使用者
-       3. 變更使用者密碼
-       4. 解鎖帳號
+       0. 檢查服務狀態
+       1. 顯示機型機號
+       2. 新增使用者
+       3. 刪除使用者
+       4. 變更使用者密碼
+       5. 解鎖帳號
+       6. 啟動 WAS 服務
+       7. 停止 WAS 服務
+       8. 啟動ITM監控
+       9. 停止ITM監控
 
         ......
         q.QUIT
@@ -58,10 +64,14 @@ main() {
     read choice
     clear
       case $choice in
-      1) ${HAADMIN_HOME}/useradd.sh ;;
-      2) ${HAADMIN_HOME}/userdel.sh ;;
-      3) ${HAADMIN_HOME}/changepassword.sh ;;
-      4) ${HAADMIN_HOME}/unlockuser.sh ;;
+      0) ./checkwas.sh ;; # su - wasadmin -c "/opt/IBM/WebSphere/usr/servers/gw_server1a_t/bin/server status gw_server1a_t";;
+      1) ./showMachineSerial.sh ;;
+      2) ./useradd.sh ;;
+      3) ./userdel.sh ;;
+      4) ./changepassword.sh ;;
+      5) ./unlockuser.sh ;;
+      6) ./startwas.sh ;; # su - wasadmin -c "/opt/IBM/WebSphere/usr/servers/gw_server1a_t/bin/server start gw_server1a_t" ;;
+      7) ./stopwas.sh ;;  #su - wasadmin -c "/opt/IBM/WebSphere/usr/servers/gw_server1a_t/bin/server stop gw_server1a_t" ;;
       q)
         echo ''
         echo 'Thanks !! bye bye ^-^ !!!'
