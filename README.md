@@ -1,7 +1,16 @@
-# adv opmenu for RHEL 7.6
+# adv opmenu for RHEL 7.6 and RHEL 8
 # Changelog
 
 ## [Unreleased]
+- Add options in menu.sh,
+        R1. UL - Check unsuccessful login count
+        R2. SM - System Model
+        R3. SN - Snap
+        R4. AP - linperf
+        R5. PF - perfPMR
+        R6. CF - Check FileSystem Size
+        R7. CC - Check CPU Memory DISK usages
+        R8. CS - cat system file
 
 ## [0.3.1] - 2020-06-15
 ### Changed

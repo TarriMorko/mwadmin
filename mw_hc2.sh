@@ -6,6 +6,19 @@ LOGFILENAME="/src/mwadmin/mw_hc2.log"
 HAADMIN_HOME="/src/mwadmin"
 to_adv_opmenu="0"
 
+# scp_to_file_server.sh, to tsmbk
+user=opusr
+target=10.0.23.141
+target_root_directory="/source/opuse/"
+target_directory=${target_root_directory}$(hostname)_$(date +%Y%m%d)
+
+# scp_to_file_server.sh, to tsmP ,for backup
+copy_to_tsm_prod="True"  # True / False
+user_tsmp=opusr
+target_tsmp=10.0.23.133
+target_root_directory="/source/opuse/"
+target_directory_tsmp=${target_root_directory}$(hostname)_$(date +%Y%m%d)
+
 writelog() {
     #######################################
     # Writing log to specify file
@@ -91,4 +104,17 @@ main() {
   done
 }
 
-main
+if [[ "$(basename -- "$0")" == "${ScriptName}" ]]; then
+  if [ ! -e "${LOGFILENAME}" ] ; then
+    touch ${LOGFILENAME}
+  fi
+  if [ ! -e "${ERRFILENAME}" ] ; then
+    touch ${ERRFILENAME}
+  fi
+  chown root ${LOGFILENAME}
+  chmod 540 ${LOGFILENAME}
+  chown root ${ERRFILENAME}
+  chmod 540 ${ERRFILENAME}
+  main
+  exit 0
+fi
