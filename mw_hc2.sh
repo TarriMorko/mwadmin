@@ -5,10 +5,12 @@
 LOGFILENAME="/src/mwadmin/mw_hc2.log"
 HAADMIN_HOME="/src/mwadmin"
 to_adv_opmenu="0"
+ScriptName="mw_hc2.sh"
 
 # scp_to_file_server.sh, to tsmbk
 user=opusr
 target=10.0.31.206
+# target=192.168.137.113
 target_root_directory="/source/opuse/"
 target_directory=${target_root_directory}$(hostname)_$(date +%Y%m%d)
 
@@ -48,16 +50,14 @@ show_main_menu() {
        Today is $(date +%Y-%m-%d)
   +====================================================================+
 
-       0. 檢查服務狀態
-       1. 顯示機型機號
-       2. 新增使用者
-       3. 刪除使用者
-       4. 變更使用者密碼
-       5. 解鎖帳號
-       6. 啟動 WAS 服務
-       7. 停止 WAS 服務
-       8. 啟動ITM監控
-       9. 停止ITM監控
+       R1. 
+       R2. 
+       R3. sosreport (collect system info)
+       R4. linperf   (collect profess info, when CPU high.)
+       R5. 
+       R6. Check FileSystem Size
+       R7. Check CPU Memory DISK usages
+       R8. cat system file
 
         ......
         q.QUIT
@@ -77,14 +77,12 @@ main() {
     read choice
     clear
       case $choice in
-      0) ./checkwas.sh ;; # su - wasadmin -c "/opt/IBM/WebSphere/usr/servers/gw_server1a_t/bin/server status gw_server1a_t";;
-      1) ./showMachineSerial.sh ;;
-      2) ./useradd.sh ;;
-      3) ./userdel.sh ;;
-      4) ./changepassword.sh ;;
-      5) ./unlockuser.sh ;;
-      6) ./startwas.sh ;; # su - wasadmin -c "/opt/IBM/WebSphere/usr/servers/gw_server1a_t/bin/server start gw_server1a_t" ;;
-      7) ./stopwas.sh ;;  #su - wasadmin -c "/opt/IBM/WebSphere/usr/servers/gw_server1a_t/bin/server stop gw_server1a_t" ;;
+      [Rr]3) ./r3_sosreport.sh ;;
+      [Rr]4) ./r4_linperf.sh ;;
+      [Rr]6) ./r6_check_FS_size.sh ;;
+      [Rr]7) ./r7_show_cpu_mem_usage.sh ;;
+      [Rr]8) ./r8_copy_to_file_server.sh ;;
+
       q)
         echo ''
         echo 'Thanks !! bye bye ^-^ !!!'

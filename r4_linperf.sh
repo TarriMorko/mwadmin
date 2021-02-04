@@ -45,6 +45,21 @@ check_pid() {
       echo '請按任意鍵繼續' && read null
       exit 1
     fi
+
+    if [ "${unchecked_pid}" == "1" ]; then
+      echo '不可輸入 pid 為 1.'
+      echo ''
+      echo '請按任意鍵繼續' && read null
+      exit 1
+    fi
+
+    if [ "${unchecked_pid}" == "0" ]; then
+      echo '不可輸入 pid 為 0.'
+      echo ''
+      echo '請按任意鍵繼續' && read null
+      exit 1
+    fi
+
   done
 
   pids=$unchecked_pids
@@ -70,15 +85,15 @@ exec_linperf() {
     exit 1
   else
     echo "Clean up ${linperf_OUTPUT_DIR}..."
-    for filename in ${linperf_OUTPUT_DIR}/*ixperf_RESULTS.tar.gz.bak ; do
+    for filename in ${linperf_OUTPUT_DIR}/*_linperf_RESULTS.tar.gz.bak ; do
       rm $filename 2>/dev/null && writelog "刪除 $filename " || writelog "無bak檔可刪除."
     done
 
-    for filename in ${linperf_OUTPUT_DIR}/*ixperf_RESULTS.tar.gz ; do
+    for filename in ${linperf_OUTPUT_DIR}/*_linperf_RESULTS.tar.gz ; do
       mv "$filename" "${filename}.bak" 2>/dev/null && writelog "將 $filename 更名為 ${filename}.bak "
     done
 
-    for filename in ${linperf_OUTPUT_DIR}/*ixperf_RESULTS.tar ; do
+    for filename in ${linperf_OUTPUT_DIR}/*_linperf_RESULTS.tar ; do
       rm $filename 2>/dev/null && writelog "刪除 $filename "
     done
     
