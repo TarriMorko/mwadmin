@@ -2,15 +2,16 @@
 # Changelog
 
 ## [Unreleased]
-- Add options in menu.sh,
-        R1. UL - Check unsuccessful login count
-        R2. SM - System Model
-        R3. SN - Snap
-        R4. AP - linperf
-        R5. PF - perfPMR
-        R6. CF - Check FileSystem Size
-        R7. CC - Check CPU Memory DISK usages
-        R8. CS - cat system file
+
+## [1.0.0] - 2021-02-04
+- Add options in mw_hc2.sh
+- Add r3_sosreport.sh
+- Add r4_linperf.sh
+- Add r6_check_FS_size.sh
+- Add r7_show_cpu_mem_usage.sh
+- Add r8_copy_to_file_server.sh
+- Add scp_to_file_server.sh
+
 
 ## [0.3.1] - 2020-06-15
 ### Changed

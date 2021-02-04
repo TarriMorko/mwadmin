@@ -8,12 +8,12 @@ to_adv_opmenu="0"
 
 # scp_to_file_server.sh, to tsmbk
 user=opusr
-target=10.0.23.141
+target=10.0.31.206
 target_root_directory="/source/opuse/"
 target_directory=${target_root_directory}$(hostname)_$(date +%Y%m%d)
 
 # scp_to_file_server.sh, to tsmP ,for backup
-copy_to_tsm_prod="True"  # True / False
+copy_to_tsm_prod="False"  # True / False
 user_tsmp=opusr
 target_tsmp=10.0.23.133
 target_root_directory="/source/opuse/"
