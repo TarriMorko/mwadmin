@@ -49,7 +49,7 @@ execute_sosreport() {
     writelog "sosreport --quiet --batch --compression-type gzip --tmp-dir ${SOS_OUTPUT_DIR}"
     sosreport --quiet --batch --compression-type gzip --tmp-dir ${SOS_OUTPUT_DIR} | tee ${LOGFILENAME}
     rc=$?
-    _name=$(tail -n 2 ${LOGFILENAME} | grep sosreport)
+    _name=$(tail -n 2 ${LOGFILENAME} | grep "^  /source/sosreport/sosreport.*gz")
     writelog "rename $_name to ${SOS_OUTPUT_DIR}/${file_prefix}_sosreport.tar.gz"
     mv $_name ${SOS_OUTPUT_DIR}/${file_prefix}_sosreport.tar.gz
     chmod -R 775 ${SOS_OUTPUT_DIR}
