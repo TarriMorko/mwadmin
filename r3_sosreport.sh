@@ -47,7 +47,7 @@ execute_sosreport() {
   if [[ "${input}" = +([Yy]) ]] ; then
     remove_old_sosreport_dir
     writelog "sosreport --quiet --batch --compression-type gzip --tmp-dir ${SOS_OUTPUT_DIR}"
-    sosreport --quiet --batch --compression-type gzip --tmp-dir ${SOS_OUTPUT_DIR} | tee ${LOGFILENAME}
+    sosreport --quiet --batch --compression-type gzip --tmp-dir ${SOS_OUTPUT_DIR} | tee -a ${LOGFILENAME}
     rc=$?
     _name=$(tail -n 2 ${LOGFILENAME} | grep "^  /source/sosreport/sosreport.*gz")
     writelog "rename $_name to ${SOS_OUTPUT_DIR}/${file_prefix}_sosreport.tar.gz"
@@ -78,7 +78,7 @@ transfer_outputfile_to_logserver() {
 
 
 clean_up() {
-    find ${SOS_OUTPUT_DIR} -name "*.md5" -exec rm {} \;
+    find ${SOS_OUTPUT_DIR} -name "*.sha256" -exec rm {} \;
 }
 
 
